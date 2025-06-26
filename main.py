@@ -37,9 +37,9 @@ class MyPlugin(Star):
                 player_list = []
                 if isinstance(player_res, dict):
                     for player in player_res:
+                        logger.info(player)
                         player_list.append(strip_escape_codes(player['name']))
                 results.append(f"IP: {ip}:{port}\n\t- 玩家数: {result['players_online']}\n\t- 玩家列表 [{', '.join(player_list)}]")
-            # results.append(str(result))
         yield event.plain_result("\n".join(results))
 
     async def terminate(self):
