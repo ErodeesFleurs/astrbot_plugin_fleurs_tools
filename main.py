@@ -2,7 +2,7 @@ from astrbot.api.event import filter, AstrMessageEvent, MessageEventResult
 from astrbot.api.star import Context, Star, register
 from astrbot.api import logger
 
-from .core.utils import query_server, strip_escape_codes, SERVER_LIST
+from .core.utils import query_server, strip_escape_codes
 
 @register("Starbound-helper", "Sanka", "-", "0.1.0")
 class MyPlugin(Star):
@@ -32,6 +32,7 @@ class MyPlugin(Star):
                     for player in player_res:
                         player_list.append(strip_escape_codes(player['name']))
                 results.append(f"IP: {ip}:{port}\n\t- 玩家数: {result['players_online']}\n\t- 玩家列表 [{', '.join(player_list)}]")
+        logger.info(f"查询结果: {results}")
         yield event.plain_result("\n".join(results))
 
     async def terminate(self):
