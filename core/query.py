@@ -1,4 +1,5 @@
 from gamedig import query
+from socket import gethostbyname
 
 SERVER_LIST = [
     {
@@ -13,6 +14,6 @@ SERVER_LIST = [
 
 def query_server(ip: str, port: int):
     try:
-        return query('starbound', ip, port)
+        return query('starbound', gethostbyname(ip), port)
     except Exception as e:
         return {'error': str(e)}
