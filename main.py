@@ -1,13 +1,15 @@
 from astrbot.api.event import filter, AstrMessageEvent, MessageEventResult
 from astrbot.api.star import Context, Star, register
 from astrbot.api import logger
+from astrbot.core.config.astrbot_config import AstrBotConfig
 
 from .core.utils import query_server, strip_escape_codes
 
 @register("Starbound-helper", "Sanka", "-", "0.1.0")
-class MyPlugin(Star):
-    def __init__(self, context: Context):
+class StarHelperPlugin(Star):
+    def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
+        self.config = config
 
     async def initialize(self):
         """可选择实现异步的插件初始化方法，当实例化该插件类之后会自动调用该方法。"""
@@ -18,7 +20,6 @@ class MyPlugin(Star):
         results = []
         server_list = self.config.get("server_list", [])
         for server in server_list:
-            # server: "ip:port"
             ip_port = server.split(":")
             ip = ip_port[0]
             port = int(ip_port[1]) if len(ip_port) > 1 else 21025
