@@ -2,7 +2,7 @@ from astrbot.api.event import filter, AstrMessageEvent, MessageEventResult
 from astrbot.api.star import Context, Star, register
 from astrbot.api import logger
 
-from core.query import query_server, SERVER_LIST
+from .core.query import query_server, SERVER_LIST
 
 @register("Starbound-helper", "Sanka", "-", "0.1.0")
 class MyPlugin(Star):
