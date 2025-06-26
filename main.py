@@ -22,8 +22,8 @@ class MyPlugin(Star):
         logger.info(message_chain)
         yield event.plain_result(f"Hello, {user_name}, 你发了 {message_str}!") # 发送一条纯文本消息
 
-    @filter.command("query")
-    async def query(self, event: AstrMessageEvent):
+    @filter.command("serverquery")
+    async def serverquery(self, event: AstrMessageEvent):
         """查询 Starbound 服务器状态"""
         results = []
         for server in SERVER_LIST:
