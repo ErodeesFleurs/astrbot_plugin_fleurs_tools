@@ -16,9 +16,12 @@ class MyPlugin(Star):
     async def serverquery(self, event: AstrMessageEvent):
         """查询 Starbound 服务器状态"""
         results = []
-        for server in SERVER_LIST:
-            ip = server["ip"]
-            port = server["port"]
+        server_list = self.config.get("server_list", [])
+        for server in server_list:
+            # server: "ip:port"
+            ip_port = server.split(":")
+            ip = ip_port[0]
+            port = int(ip_port[1]) if len(ip_port) > 1 else 21025
             result = query_server(ip, port)
             if "error" in result:
                 results.append(f"IP: {ip}:{port}\n\t查询失败: {result['error']}")

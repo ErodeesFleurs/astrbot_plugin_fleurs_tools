@@ -1,0 +1,8 @@
+{
+    "server_list": {
+        "type": "list",
+        "title": "服务器列表",
+        "description": "用于查询的服务器列表",
+        "default": []
+    }
+}

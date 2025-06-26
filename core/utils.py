@@ -3,17 +3,6 @@ import re;
 from gamedig import query
 from socket import gethostbyname
 
-SERVER_LIST = [
-    {
-        "ip": "starbuddy.top",
-        "port": 21025
-    },
-    {
-        "ip": "starbound-china.com",
-        "port": 21025
-    }
-]
-
 def query_server(ip: str, port: int):
     try:
         return query('starbound', gethostbyname(ip), port)
