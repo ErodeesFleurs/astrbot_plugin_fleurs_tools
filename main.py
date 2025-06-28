@@ -3,7 +3,7 @@ from astrbot.api.star import Context, Star, register
 from astrbot.api import logger
 from astrbot.core.config.astrbot_config import AstrBotConfig
 
-from .core.utils import query_server, strip_escape_codes
+from .core.utils import query_server, strip_escape_codes, reboot_container
 
 @register("Starbound-helper", "Sanka", "-", "0.1.0")
 class StarHelperPlugin(Star):
@@ -34,6 +34,19 @@ class StarHelperPlugin(Star):
                         player_list.append(strip_escape_codes(player['name']))
                 results.append(f"IP: {ip}:{port}\n\t- 玩家数: {result['players_online']}\n\t- 玩家列表 [{', '.join(player_list)}]")
         logger.info(f"查询结果: {results}")
+        yield event.plain_result("\n".join(results))
+    
+    @filter.command("reboot")
+    async def reboot(self, event: AstrMessageEvent):
+        """重启指定容器"""
+        results = []
+        container_list = self.config.get("container_list", [])
+        for container in container_list:
+            response = reboot_container(container)
+            if "error" in response:
+                results.append(f"容器 {container} 重启失败: {response['error']}")
+            else:
+                results.append(f"容器 {container} 重启成功")
         yield event.plain_result("\n".join(results))
 
     async def terminate(self):
