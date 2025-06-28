@@ -4,5 +4,11 @@
         "title": "服务器列表",
         "description": "用于查询的服务器列表",
         "default": []
+    },
+    "container_list": {
+        "type": "list",
+        "title": "容器列表",
+        "description": "用于重启的容器列表",
+        "default": []
     }
 }
